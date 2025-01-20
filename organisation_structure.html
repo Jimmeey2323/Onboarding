@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Centralized Hierarchical Organization Chart</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f9fafb;
+            color: #333;
+            max-width: 100%;
+        }
+
+        .hero-section {
+            background: linear-gradient(120deg, #007bff, #000608);
+            padding: 10px 10px; /* Increased padding for better spacing */
+            color: #fff;
+            text-align: center;
+            margin: 0; /* Remove margin to make it full width */
+            position: relative;
+            overflow: hidden;
+            width: 100%; /* Ensure it takes full width */
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); /* Add shadow for depth */
+        }
+
+        .hero-section h1 {
+            font-size: 3.5rem; /* Increased font size for prominence */
+            font-weight: 700;
+            margin-bottom: 20px;
+            animation: fadeInDown 1.5s ease-in-out;
+        }
+
+        .hero-section i {
+            font-size: 3rem;
+            margin-right: 10px;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-section h1 {
+                font-size: 2.5rem; /* Adjust font size for smaller screens */
+            }
+
+            .hero-section i {
+                font-size: 2.5rem; /* Adjust icon size for smaller screens */
+            }
+        }
+        * {margin: 0; padding: 0;}
+
+        .tree ul {
+            padding-top: 20px;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            flex-wrap: nowrap;
+            transition: all 0.5s;
+        }
+
+        .tree li {
+            text-align: center;
+            list-style-type: none;
+            position: relative;
+            padding: 20px 5px 0 5px;
+            transition: all 0.5s;
+        }
+
+        .tree li::before, .tree li::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            border-top: 1px solid #ccc;
+            width: 50%;
+            height: 20px;
+        }
+
+        .tree li::before {
+            right: 50%;
+        }
+
+        .tree li::after {
+            left: 50%;
+            border-left: 1px solid #ccc;
+        }
+
+        .tree li:only-child::after, .tree li:only-child::before {
+            display: none;
+        }
+
+        .tree li:only-child { padding-top: 0; }
+
+        .tree ul ul::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            border-left: 1px solid #ccc;
+            height: 20px;
+        }        
+
+        .tree li a:hover, .tree li a:hover+ul li a {
+            background: #c8e4f8;
+            color: #000;
+            border: 1px solid #94a0b4;
+        }
+
+        .tree li a:hover+ul li::after, 
+        .tree li a:hover+ul li::before, 
+        .tree li a:hover+ul::before, 
+        .tree li a:hover+ul ul::before {
+            border-color: #94a0b4;
+        }
+
+        .tree li a {
+            border: 1px solid #ccc;
+            padding: 10px; /* Increased padding for better spacing */
+            text-decoration: none;
+            color: #666;
+            font-family: Arial, Verdana, Tahoma;
+            font-size: 11px;
+            display: inline-block;
+            border-radius: 10px; /* Rounded corners */
+            transition: all 0.3s ease; /* Smooth transition for hover effects */
+            background: linear-gradient(145deg, #ffffff, #e6e6e6); /* Light gradient background */
+            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1), 
+                        -5px -5px 15px rgba(255, 255, 255, 0.9); /* 3D shadow effect */
+        }
+
+        .tree li a:hover {
+            background: linear-gradient(145deg, #e6e6e6, #ffffff); /* Reverse gradient on hover */
+            color: #000; /* Change text color on hover */
+            border: 1px solid #94a0b4; /* Change border color on hover */
+            transform: translateY(-5px); /* Lift effect on hover */
+            box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.2), 
+                        -10px -10px 20px rgba(255, 255, 255, 0.9); /* Enhanced shadow on hover */
+        }
+
+        .tree li a img {
+            border-radius: 50%;
+            margin-right: 5px;
+            transition: transform 0.3s ease; /* Smooth transition for image scaling */
+        }
+
+        .tree li a:hover img {
+            transform: scale(1.1); /* Slightly enlarge image on hover */
+        }
+
+        .tree li a .designation {
+            display: inline-block;
+            background-color: #f3f4f6;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-size: 10px;
+            color: #4b5563;
+            margin-top: 5px;
+            transition: background-color 0.3s ease; /* Smooth transition for background color */
+        }
+
+        .tree li a:hover .designation {
+            background-color: #c8e4f8; /* Change background color on hover */
+            color: #000; /* Change text color on hover */
+        }
+        /* Styles for great-grandchild elements */
+        .tree ul ul ul ul {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .tree ul ul ul ul li {
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 600px) {
+            .tree ul {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+        .icon-list {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            gap: 10px;
+        }
+
+        .icon-list i {
+            color: #a80000;
+            font-size: 1.5rem;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800 font-sans">    
+        <div id="navbar-container"></div> <!-- This is where the navbar will be loaded -->
+        <div class="hero-section">
+            <div class="icon-item">
+                <h1><i class="fa-solid fa-sitemap"></i>
+                    Organisational Structure
+                </h1>
+            </div>
+        </div>    
+        <div class="space-y-4">
+    <div class="tree">
+        <ul>
+         <li>
+          <a href="#">
+           <img alt="Placeholder image for Mallika Parekh" height="20" src="/295559e87b67fde4bbd5d5049d67e678.jpg" width="20"/>
+           <br/>
+           Mallika Parekh
+           <br/>
+           <span class="designation">
+            Managing Director
+           </span>
+          </a>
+          <ul>
+           <li>
+            <a href="#">
+             <img alt="Placeholder image for Mitali Kumar" height="20" src="/295559e87b67fde4bbd5d5049d67e678.jpg" width="20"/>
+             <br/>
+             Mitali Kumar
+             <br/>
+             <span class="designation">
+              Chief Operations Manager
+             </span>
+            </a>
+            <ul>
+             <li>
+              <a href="#">
+               <img alt="Placeholder image for Saachi Shetty" height="20" src="/295559e87b67fde4bbd5d5049d67e678.jpg" width="20"/>
+               <br/>
+               Saachi Shetty
+               <br/>
+               <span class="designation">
+                Sr. Operations Manager
+               </span>
+              </a>
+              <ul>
+               <li>
+                <a href="#">
+                 <img alt="Placeholder image for Zahur Shaikh" height="20" src="/295559e87b67fde4bbd5d5049d67e678.jpg" width="20"/>
+                 <br/>
+                 Zahur Shaikh
+                 <br/>
+                 <span class="designation">
+                  Studio Coordinator
+                 </span>
+                </a>
+               </li>
+              </ul>
+             </li>
+             <li>
+              <a href="#">
+               <img alt="Placeholder image for Jimmeey Gondaa" height="20" src="/295559e87b67fde4bbd5d5049d67e678.jpg" width="20"/>
+               <br/>
+               Jimmeey Gondaa
+               <br/>
+               <span class="designation">
+                Head of Sales &amp; Client Servicing
+               </span>
+              </a>
+              <ul>
+               <li>
+                <a href="#">
+                 <img alt="Placeholder image for Akshay Rane" height="20" src="/295559e87b67fde4bbd5d5049d67e678.jpg" width="20"/>
+                 <br/>
+                 Akshay Rane
+                 <br/>
+                 <span class="designation">
+                  Sales &amp; Client Servicing Associate
+                 </span>
+                </a>
+               </li>
+               <li>
+                <a href="#">
+                 <img alt="Placeholder image for Tahira Sayyed" height="20" src="/295559e87b67fde4bbd5d5049d67e678.jpg" width="20"/>
+                 <br/>
+                 Tahira Sayyed
+                 <br/>
+                 <span class="designation">
+                  Sales &amp; Client Servicing Associate
+                 </span>
+                </a>
+               </li>
+               <li>
+                <a href="#">
+                 <img alt="Placeholder image for Sheetal Kataria" height="20" src="/295559e87b67fde4bbd5d5049d67e678.jpg" width="20"/>
+                 <br/>
+                 Sheetal Kataria
+                 <br/>
+                 <span class="designation">
+                  Sales &amp; Client Servicing Associate
+                 </span>
+                </a>
+               </li>
+               <li>
+                <a href="#">
+                 <img alt="Placeholder image for Manisha Rathod" height="20" src="/295559e87b67fde4bbd5d5049d67e678.jpg" width="20"/>
+                 <br/>
+                 Manisha Rathod
+                 <br/>
+                 <span class="designation">
+                  Sales &amp; Client Servicing Associate
+                 </span>
+                </a>
+               </li>
+               <li>
+                <a href="#">
+                 <img alt="Placeholder image for Shipra Bhika" height="20" src="/295559e87b67fde4bbd5d5049d67e678.jpg" width="20"/>
+                 <br/>
+                 Shipra Bhika
+                 <br/>
+                 <span class="designation">
+                  Sales &amp; Client Servicing Associate
+                 </span>
+                </a>
+               </li>
+               <li>
+                <a href="#">
+                 <img alt="Placeholder image for Imran Shaikh" height="20" src="/295559e87b67fde4bbd5d5049d67e678.jpg" width="20"/>
+                 <br/>
+                 Imran Shaikh
+                 <br/>
+                 <span class="designation">
+                  Sr. Sales &amp; Client Servicing Associate
+                 </span>
+                </a>
+               </li>
+              </ul>
+             </li>
+             <li>
+              <a href="#">
+               <img alt="Placeholder image for Shifa Ali" height="20" src="/295559e87b67fde4bbd5d5049d67e678.jpg" width="20"/>
+               <br/>
+               Shifa Ali
+               <br/>
+               <span class="designation">
+                Regional Operations Manager - South
+               </span>
+              </a>
+              <ul>
+               <li>
+                <a href="#">
+                 <img alt="Placeholder image for Wungsingla Serou" height="20" src="/295559e87b67fde4bbd5d5049d67e678.jpg" width="20"/>
+                 <br/>
+                 Wungsingla Serou
+                 <br/>
+                 <span class="designation">
+                  Sales &amp; Client Servicing Associate
+                 </span>
+                </a>
+               </li>
+               <li>
+                <a href="#">
+                 <img alt="Placeholder image for Prathap Kp" height="20" src="/295559e87b67fde4bbd5d5049d67e678.jpg" width="20"/>
+                 <br/>
+                 Prathap Kp
+                 <br/>
+                 <span class="designation">
+                  Sales &amp; Client Servicing Associate
+                 </span>
+                </a>
+               </li>
+               <li>
+                <a href="#">
+                 <img alt="Placeholder image for Jayanta Banerjee" height="20" src="/295559e87b67fde4bbd5d5049d67e678.jpg" width="20"/>
+                 <br/>
+                 Jayanta Banerjee
+                 <br/>
+                 <span class="designation">
+                  Sales &amp; Client Servicing Associate
+                 </span>
+                </a>
+               </li>
+              </ul>
+             </li>
+            </ul>
+           </li>
+           <li>
+            <a href="#">
+             <img alt="Placeholder image for Sachin Nalawade" height="20" src="/295559e87b67fde4bbd5d5049d67e678.jpg" width="20"/>
+             <br/>
+             Sachin Nalawade
+             <br/>
+             <span class="designation">
+              Accounts Manager
+             </span>
+            </a>
+            <ul>
+             <li>
+              <a href="#">
+               <img alt="Placeholder image for Gaurav Sogam" height="20" src="/295559e87b67fde4bbd5d5049d67e678.jpg" width="20"/>
+               <br/>
+               Gaurav Sogam
+               <br/>
+               <span class="designation">
+                Accounts Associate
+               </span>
+              </a>
+             </li>
+             <li>
+              <a href="#">
+               <img alt="Placeholder image for Nisha" height="20" src="/295559e87b67fde4bbd5d5049d67e678.jpg" width="20"/>
+               <br/>
+               Nisha
+               <br/>
+               <span class="designation">
+                Accounts Associate
+               </span>
+              </a>
+             </li>
+            </ul>
+           </li>
+           <li>
+            <a href="#">
+             <img alt="Placeholder image for Anisha Shah" height="20" src="/295559e87b67fde4bbd5d5049d67e678.jpg" width="20"/>
+             <br/>
+             Anisha Shah
+             <br/>
+             <span class="designation">
+              Master Trainer
+             </span>
+            </a>
+            <ul>
+             <li>
+              <a href="#">
+               <img alt="Placeholder image for Pushyank Nahar" height="20" src="/295559e87b67fde4bbd5d5049d67e678.jpg" width="20"/>
+               <br/>
+               Pushyank Nahar
+               <br/>
+               <span class="designation">
+                Head Trainer - Bengaluru
+               </span>
+              </a>
+              <ul>
+               <li>
+                <a href="#">
+                 <img alt="Placeholder image for Shruthi Kulkarni" height="20" src="/295559e87b67fde4bbd5d5049d67e678.jpg" width="20"/>
+                 <br/>
+                 Shruthi Kulkarni
+                 <br/>
+                 <span class="designation">
+                  Trainer
+                 </span>
+                </a>
+               </li>
+               <li>
+                <a href="#">
+                 <img alt="Placeholder image for Shruti Suresh" height="20" src="/295559e87b67fde4bbd5d5049d67e678.jpg" width="20"/>
+                 <br/>
+                 Shruti Suresh
+                 <br/>
+                 <span class="designation">
+                  Trainer
+                 </span>
+                </a>
+               </li>
+               <li>
+                <a href="#">
+                 <img alt="Placeholder image for Kajol Kanchan" height="20" src="/295559e87b67fde4bbd5d5049d67e678.jpg" width="20"/>
+                 <br/>
+                 Kajol Kanchan
+                 <br/>
+                 <span class="designation">
+                  Trainer
+                 </span>
+                </a>
+               </li>
+               <li>
+                <a href="#">
+                 <img alt="Placeholder image for Poojitha Bhaskar" height="20" src="/295559e87b67fde4bbd5d5049d67e678.jpg" width="20"/>
+                 <br/>
+                 Poojitha Bhaskar
+                 <br/>
+                 <span class="designation">
+                  Trainer
+                 </span>
+                </a>
+               </li>
+              </ul>
+             </li>
+             <li>
+                <a href="#">
+                 <img alt="Placeholder image for Pushyank Nahar" height="20" src="/295559e87b67fde4bbd5d5049d67e678.jpg" width="20"/>
+                 <br/>
+                 Saniya Jaiswal
+                 <br/>
+                 <span class="designation">
+                  Head Trainer - Mumbai
+                 </span>
+                </a>
+                <ul>
+                 <li>
+                  <a href="#">
+                   <img alt="Placeholder image for Shruthi Kulkarni" height="20" src="/295559e87b67fde4bbd5d5049d67e678.jpg" width="20"/>
+                   <br/>
+                   Rohan Dahima
+                   <br/>
+                   <span class="designation">
+                    Sr. Trainer
+                   </span>
+                  </a>
+                 </li>
+                 <li>
+                  <a href="#">
+                   <img alt="Placeholder image for Shruti Suresh" height="20" src="/295559e87b67fde4bbd5d5049d67e678.jpg" width="20"/>
+                   <br/>
+                   Richard D'Costa
+                   <br/>
+                   <span class="designation">
+                    Sr. Sr. Trainer
+                   </span>
+                  </a>
+                 </li>
+                 <li>
+                  <a href="#">
+                   <img alt="Placeholder image for Kajol Kanchan" height="20" src="/295559e87b67fde4bbd5d5049d67e678.jpg" width="20"/>
+                   <br/>
+                   Pranjali Jain
+                   <br/>
+                   <span class="designation">
+                    Sr. Trainer
+                   </span>
+                  </a>
+                 </li>
+                 <li>
+                  <a href="#">
+                   <img alt="Placeholder image for Poojitha Bhaskar" height="20" src="/295559e87b67fde4bbd5d5049d67e678.jpg" width="20"/>
+                   <br/>
+                   Reshma Sharma
+                   <br/>
+                   <span class="designation">
+                    Trainer
+                   </span>
+                  </a>
+                 </li>
+                </ul>
+               </li>
+               <li>
+                <a href="#">
+                 <img alt="Placeholder image for Pushyank Nahar" height="20" src="/295559e87b67fde4bbd5d5049d67e678.jpg" width="20"/>
+                 <br/>
+                 Pushyank Nahar
+                 <br/>
+                 <span class="designation">
+                  Head Trainer - Bengaluru
+                 </span>
+                </a>
+                <ul>
+                 <li>
+                  <a href="#">
+                   <img alt="Placeholder image for Shruthi Kulkarni" height="20" src="/295559e87b67fde4bbd5d5049d67e678.jpg" width="20"/>
+                   <br/>
+                   Shruthi Kulkarni
+                   <br/>
+                   <span class="designation">
+                    Trainer
+                   </span>
+                  </a>
+                 </li>
+                 <li>
+                  <a href="#">
+                   <img alt="Placeholder image for Shruti Suresh" height="20" src="/295559e87b67fde4bbd5d5049d67e678.jpg" width="20"/>
+                   <br/>
+                   Shruti Suresh
+                   <br/>
+                   <span class="designation">
+                    Trainer
+                   </span>
+                  </a>
+                 </li>
+                 <li>
+                  <a href="#">
+                   <img alt="Placeholder image for Kajol Kanchan" height="20" src="/295559e87b67fde4bbd5d5049d67e678.jpg" width="20"/>
+                   <br/>
+                   Kajol Kanchan
+                   <br/>
+                   <span class="designation">
+                    Trainer
+                   </span>
+                  </a>
+                 </li>
+                 <li>
+                  <a href="#">
+                   <img alt="Placeholder image for Poojitha Bhaskar" height="20" src="/295559e87b67fde4bbd5d5049d67e678.jpg" width="20"/>
+                   <br/>
+                   Poojitha Bhaskar
+                   <br/>
+                   <span class="designation">
+                    Trainer
+                   </span>
+                  </a>
+                 </li>
+                </ul>
+               </li>
+             <li>
+              <a href="#">
+               <img alt="Placeholder image for Mrigakshi Jaiswal" height="20" src="/295559e87b67fde4bbd5d5049d67e678.jpg" width="20"/>
+               <br/>
+               Mrigakshi Jaiswal
+               <br/>
+               <span class="designation">
+                Trainer &amp; Training Associate
+               </span>
+              </a>
+              <ul>
+               <li>
+                <a href="#">
+                 <img alt="Placeholder image for Pranjali Jain" height="20" src="/295559e87b67fde4bbd5d5049d67e678.jpg" width="20"/>
+                 <br/>
+                 Atulan Purohit
+                 <br/>
+                 <span class="designation">
+                  Sr Trainer
+                 </span>
+                </a>
+               </li>
+               <li>
+                <a href="#">
+                 <img alt="Placeholder image for Pranjali Jain" height="20" src="/295559e87b67fde4bbd5d5049d67e678.jpg" width="20"/>
+                 <br/>
+                 Karan Bhatia
+                 <br/>
+                 <span class="designation">
+                  Trainer
+                 </span>
+                </a>
+               </li>
+               <li>
+                <a href="#">
+                 <img alt="Placeholder image for Pranjali Jain" height="20" src="/295559e87b67fde4bbd5d5049d67e678.jpg" width="20"/>
+                 <br/>
+                 Karanvir Bhatia
+                 <br/>
+                 <span class="designation">
+                  Trainer
+                 </span>
+                </a>
+               </li>
+              </ul>
+             </li>
+            </ul>
+           </li>
+          </ul>
+         </li>
+        </ul>       
+       </div>
+    </div>
+    <script>
+        function toggleCard(card) {
+            const li = card.parentElement;
+            li.classList.toggle('open');
+            const childUl = li.querySelector('ul');
+            if (childUl) {
+                childUl.style.display = li.classList.contains('open') ? 'flex' : 'none';
+            }
+        }
+    
+        document.querySelectorAll('.card').forEach(card => {
+            const parentCard = card.closest('ul').closest('li').querySelector('.card');
+            if (parentCard) {
+                card.classList.add(parentCard.classList[1]);
+            }
+        });
+    
+        document.addEventListener("DOMContentLoaded", function() {
+            fetch('navbar.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('navbar-container').innerHTML = data;
+    
+                    // Initialize navbar after loading
+                    let navbar = document.getElementById('navbar');
+                    let timeout;
+    
+                    function hideNavbar() {
+                        navbar.style.opacity = '0';
+                        navbar.style.transition = 'opacity 0.3s ease, visibility 0.3s ease'; // Ensure smooth transition
+                        setTimeout(() => {
+                            navbar.style.display = 'none'; // Use display none to remove it from the layout
+                        }, 300); // Match this timeout with the CSS transition duration
+                    }
+    
+                    function resetTimer() {
+                        clearTimeout(timeout);
+                        navbar.style.opacity = '1';
+                        navbar.style.display = 'block'; // Show the navbar
+                        timeout = setTimeout(hideNavbar, 5000);
+                    }
+    
+                    // Set up event listeners after navbar is loaded
+                    document.addEventListener('mousemove', resetTimer);
+                    document.addEventListener('keydown', resetTimer);
+    
+                    resetTimer(); // Initialize the timer when the page loads
+                })
+                .catch(error => console.error('Error loading the navbar:', error));
+        });
+    </script>
+</body>
+</html>

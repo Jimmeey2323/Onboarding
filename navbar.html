@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f4f9;
+        }
+
+        .main-menu {
+            background: linear-gradient(135deg, #292929, #08012b);
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            overflow: hidden;
+            transition: width 0.3s ease, opacity 0.3s ease, visibility 0.3s ease;
+            z-index: 1000;
+            opacity: 1;
+            visibility: visible;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .main-menu:hover {
+            width: 200px;
+        }
+
+        .main-menu ul {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+        }
+
+        .main-menu li {
+            position: relative;
+            width: 100%;
+        }
+
+        .main-menu li a {
+            display: flex;
+            align-items: left;
+            color: #ffffff;
+            text-decoration: none;
+            padding: 10px;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        .main-menu li a:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+        }
+
+        .main-menu .nav-icon {
+            min-width: 20px;
+            text-align: left;
+            font-size: 16px;
+        }
+
+        .main-menu .nav-text {
+            display: none;
+            margin-left: 10px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .main-menu:hover .nav-text {
+            display: inline;
+        }
+
+        .submenu {
+            display: none;
+            background: rgba(255, 255, 255, 0.1);
+            padding-left: 10px;
+        }
+
+        .has-subnav:hover .submenu {
+            display: block;
+        }
+
+        .logout {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <nav class="main-menu" id="navbar">
+        <ul>
+            <li>
+                <a href="https://physique57india.com/">
+                    <i class="fas fa-dumbbell nav-icon"></i>
+                    <span class="nav-text">Physique 57 India</span>
+                </a>
+            </li>
+            <li class="has-subnav">
+                <a href="#">
+                    <i class="fas fa-info-circle nav-icon"></i>
+                    <span class="nav-text">About Us</span>
+                </a>
+                <ul class="submenu">
+                    <li><a href="PnP.html"><span class="nav-text">Policies & Brand Guidelines</span></a></li>
+                    <li><a href="trainingschedule.html"><span class="nav-text">Training Schedule</span></a></li>
+                    <li><a href="history.html"><span class="nav-text">About Us</span></a></li>
+                    <li><a href="about_owner.html"><span class="nav-text">About the Owner</span></a></li>
+                    <li><a href="core_values.html"><span class="nav-text">Core Values</span></a></ ```html
+                    <li><a href="milestones.html"><span class="nav-text">Milestones</span></a></li>
+                    <li><a href="organisation_structure.html"><span class="nav-text">Organisation Structure</span></a></li>                
+                </ul>
+            </li>
+            <li class="has-subnav">
+                <a href="#">
+                    <i class="fas fa-camera-retro nav-icon"></i>
+                    <span class="nav-text">Introduction to Physique 57</span>
+                </a>
+                <ul class="submenu">
+                    <li><a href="intro2physique.html"><span class="nav-text">What is Physique 57?</span></a></li>
+                    <li><a href="benefits.html"><span class="nav-text">Benefits & USP’s</span></a></li>
+                    <li><a href="class_level_descriptions.html"><span class="nav-text">Class Level Descriptions</span></a></li>
+                    <li><a href="packages_memberships.html"><span class="nav-text">Packages & Memberships</span></a></li>
+                </ul>
+            </li>
+            <li class="has-subnav">
+                <a href="#">
+                    <i class="fas fa-cogs nav-icon"></i>
+                    <span class="nav-text">Policies & Regulations</span>
+                </a>
+                <ul class="submenu">
+                    <li><a href="studio_procedure.html"><span class="nav-text">Studio Opening & Closing Procedure</span></a></li>
+                    <li><a href="boutique_management.html"><span class="nav-text">Boutique & Inventory Management</span></a></li>
+                    <li><a href="lead_management.html"><span class="nav-text">Lead Management & Sales techniques</span></a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="client_personas.html">
+                    <i class="fas fa-users nav-icon"></i>
+                    <span class="nav-text">Client Personas</span>
+                </a>
+            </li>
+            <li>
+                <a href="harvard_business_review.html">
+                    <i class="fas fa-book nav-icon"></i>
+                    <span class="nav-text">Harvard Business Review</span>
+                </a>
+            </li>
+            <li>
+                <a href="FAQ's.html">
+                    <i class="fas fa-question-circle nav-icon"></i>
+                    <span class="nav-text">Frequently Asked Questions</span>
+                </a>
+            </li>
+        </ul>
+
+        <ul class="logout">
+            <li>
+                <a href="logout.html">
+                    <i class="fas fa-power-off nav-icon"></i>
+                    <span class="nav-text">Logout</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <script>
+        let navbar = document.getElementById('navbar');
+        let timeout;
+
+        function hideNavbar() {
+            navbar.style.opacity = '0';
+            navbar.style.visibility = 'hidden'; // Hide the navbar completely
+        }
+
+        function resetTimer() {
+            clearTimeout(timeout);
+            navbar.style.opacity = '1';
+            navbar.style.visibility = 'visible'; // Show the navbar
+            timeout = setTimeout(hideNavbar, 5000);
+        }
+
+        document.addEventListener('mousemove', resetTimer);
+        document.addEventListener('keydown', resetTimer);
+
+        resetTimer(); // Initialize the timer when the page loads
+    </script>
+</body>
+</html>

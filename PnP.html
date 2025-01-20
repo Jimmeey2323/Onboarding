@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Physique 57: A Journey of Transformation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <style>
+         body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f9fafb;
+            color: #333;
+        }
+
+        .hero-section {
+            background: linear-gradient(120deg, #007bff, #000608);
+            padding: 0px 0px; /* Increased padding for better spacing */
+            color: #fff;
+            text-align: center;
+            margin: 0; /* Remove margin to make it full width */
+            position: relative;
+            overflow: hidden;
+            width: 100%; /* Ensure it takes full width */
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); /* Add shadow for depth */
+            max-height: 80px;
+        }
+
+        .hero-section h1 {
+            font-size: 2.5rem; /* Increased font size for prominence */
+            letter-spacing:1rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            animation: fadeInDown 1.5s ease-in-out;
+        }
+
+        .hero-section i {
+            font-size: 2.5rem;
+            margin-right: 1px;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-section h1 {
+                font-size: 2.5rem; /* Adjust font size for smaller screens */
+            }
+
+            .hero-section i {
+                font-size: 2.5rem; /* Adjust icon size for smaller screens */
+            }
+        }
+
+        .card {
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .card img {
+            width: 100%;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .card img:hover {
+            transform: scale(1.05);
+        }
+
+        .quote {
+            font-size: 1.5rem;
+            font-style: italic;
+            color: #007bff;
+            margin-top: 30px;
+            animation: fadeInText 2.5s ease-in-out;
+        }
+
+        .quote-author {
+            font-size: 1rem;
+            color: #555;
+            margin-top: 10px;
+            animation: fadeInText 2.5s ease-in-out;
+        }
+
+        @keyframes fadeInText {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .icon-list {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            gap: 10px;
+        }
+
+        .icon-list i {
+            color: #a80000;
+            font-size: 1.5rem;
+        }
+        .pdf-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        .pdf-card {
+            background-color: #fff;
+            border: 2px solid #000000;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            height: 450px;
+            padding: 10px;
+            transition: transform 0.3s;
+            cursor: pointer;
+        }
+
+        .pdf-card:hover {
+            transform: scale(1.05);
+        }
+
+        .pdf-card i {
+            font-size: 20px;
+            color: #7c0000;
+        }
+
+        .pdf-title {
+            margin-top: 10px;
+            font-weight: bold;
+            font-size: 20px;
+            text-transform: uppercase;
+        }       
+    </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            fetch('navbar.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('navbar-container').innerHTML = data;
+                })
+                .catch(error => console.error('Error loading the navbar:', error));
+        });
+        function openPDF(pdfUrl) {
+            const newWindow = window.open(pdfUrl, '_blank');
+            newWindow.focus();
+        }
+    </script>
+</head>
+<body>
+    <div class="hero-section bg-gradient-to-r from-blue-800 to-indigo-900 text-white text-center py-5 shadow-lg">
+        <h1 class="text-4xl font-bold tracking-widest animate-fadeInDown">
+            <i class="fas fa-file-contract mr-2"></i> Policies & Brand Guidelines
+        </h1>
+    </div>
+    <div class="container mx-auto p-6">
+        <div id="navbar-container"></div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-25 mb-10">
+            <div class="pdf-card bg-white border-2 border-gray-200 rounded-lg shadow-lg p-4 cursor-pointer hover:scale-105 transition-transform">
+                <iframe src="/Docs/POSH policy.pdf" class="w-full h-80 rounded-lg mb-4"></iframe>
+                <div class="pdf-title mt-4 text-lg font-bold">Policy on Prevention of Sexual Harassment (POSH)</div>
+            </div>
+            <div class="pdf-card bg-white border-2 border-gray-200 rounded-lg shadow-md p-4 cursor-pointer hover:scale-105 transition-transform">
+                <iframe src="/Docs/Vendor & Partner Discount Policy.pdf" class="w-full h-80 rounded-lg mb-4"></iframe>
+                <div class="pdf-title mt-4 text-lg font-semibold">Vendor & Partner Discount Policy</div>
+            </div>
+            <div class="pdf-card bg-white border-2 border-gray-200 rounded-lg shadow-md p-4 cursor-pointer hover:scale-105 transition-transform">
+                <iframe src="/Docs/P57 Friends and Family Policy 2024.pdf" class="w-full h-80 rounded-lg mb-4"></iframe>
+                <div class="pdf-title mt-4 text-lg font-semibold">Friends & Family</div>
+            </div>
+            <div class="pdf-card bg-white border-2 border-gray-200 rounded-lg shadow-md p-4 cursor-pointer hover:scale-105 transition-transform">
+                <iframe src="/Docs/Studio Class Cancellation Policy.pdf" class="w-full h-80 rounded-lg mb-4"></iframe>
+                <div class="pdf-title mt-4 text-lg font-semibold">Class Cancellation Policy</div>
+            </div>
+            <div class="pdf-card bg-white border-2 border-gray-200 rounded-lg shadow-md p-4 cursor-pointer hover:scale-105 transition-transform">
+                <iframe src="/Docs/Fluent Employee Policy.pdf" class="w-full h-80 rounded-lg mb-4"></iframe>
+                <div class="pdf-title mt-4 text-lg font-semibold">Fluent Employee Policy</div>
+            </div>
+            <div class="pdf-card bg-white border-2 border-gray-200 rounded-lg shadow-md p-4 cursor-pointer hover:scale-105 transition-transform">
+                <iframe src="/Docs/PowerCycle.pdf" class="w-full h-80 rounded-lg mb-4"></iframe>
+                <div class="pdf-title mt-4 text-lg font-semibold">Power Cycle SOP</div>
+            </div>
+            <div class="pdf-card bg-white border-2 border-gray-200 rounded-lg shadow-md p-4 cursor-pointer hover:scale-105 transition-transform">
+                <iframe src="/Docs/Roll Over Policy.pdf" class="w-full h-80 rounded-lg mb-4"></iframe>
+                <div class="pdf-title mt-4 text-lg font-semibold">Roll Over Policy</div>
+            </div>
+            <div class="pdf-card bg-white border-2 border-gray-200 rounded-lg shadow-md p-4 cursor-pointer hover:scale-105 transition-transform">
+                <iframe src="/Docs/Leave Policy Final .docx" class="w-full h-80 rounded-lg mb-4"></iframe>
+                <div class="pdf-title mt-4 text-lg font-semibold">Leave Policy</div>
+            </div>
+            <div class="pdf-card bg-white border-2 border-gray-200 rounded-lg shadow-md p-4 cursor-pointer hover:scale-105 transition-transform">
+                <iframe src="/Docs/Probation Policy.docx" class="w-full h-80 rounded-lg mb-4"></iframe>
+                <div class="pdf-title mt-4 text-lg font-semibold">Probation Policy</div>
+            </div>
+            <div class="pdf-card bg-white border-2 border-gray-200 rounded-lg shadow-md p-4 cursor-pointer hover:scale-105 transition-transform">
+                <iframe src="/Docs/Employee Referral Policy.docx" class="w-full h-80 rounded-lg mb-4"></iframe>
+                <div class="pdf-title mt-4 text-lg font-semibold">Employee Referral Policy</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

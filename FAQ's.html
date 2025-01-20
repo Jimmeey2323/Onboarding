@@ -1,0 +1,557 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Journey</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f9fafb;
+            color: #333;
+        }
+
+        .hero-section {
+            background: linear-gradient(120deg, #007bff, #000608);
+            color: #fff;
+            text-align: left;
+            position: relative;
+            overflow: hidden;
+            width: 100%; /* Ensure it takes full width */
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); /* Add shadow for depth */
+            max-height: 100px;
+        }
+
+        .hero-section h1 {
+            font-size: 2.5rem; /* Increased font size for prominence */
+            letter-spacing:1.9rem;
+            font-weight: 800;
+            margin-left:30px;
+            animation: fadeInDown 1.5s ease-in-out;
+            text-transform: uppercase;
+        }
+
+        .hero-section i {
+            font-size: 2rem;
+            margin-right: 1px;
+            margin-left:30px;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-section h1 {
+                font-size: 2.5rem; /* Adjust font size for smaller screens */
+            }
+
+            .hero-section i {
+                font-size: 2.5rem; /* Adjust icon size for smaller screens */
+            }
+        }
+
+        .card {
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .card img {
+            width: 100%;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .card img:hover {
+            transform: scale(1.05);
+        }
+
+        .quote {
+            font-size: 1.5rem;
+            font-style: italic;
+            color: #007bff;
+            margin-top: 30px;
+            animation: fadeInText 2.5s ease-in-out;
+        }
+
+        .quote-author {
+            font-size: 1rem;
+            color: #555;
+            margin-top: 10px;
+            animation: fadeInText 2.5s ease-in-out;
+        }
+
+        @keyframes fadeInText {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .icon-list {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            gap: 10px;
+        }
+
+        .icon-list i {
+            color: #a80000;
+            font-size: 1.5rem;
+        }
+
+        .pdf-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .pdf-card {
+            background-color: #fff;
+            border: 2px solid #000000;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 200px;
+            height: 250px;
+            padding: 10px;
+            transition: transform 0.3s;
+            cursor: pointer;
+        }
+
+        .pdf-card:hover {
+            transform: scale(1.05);
+        }
+
+        .pdf-card i {
+            font-size: 50px;
+            color: #7c0000;
+        }
+
+        .pdf-title {
+            margin-top: 10px;
+            font-weight: bold;
+            font-size: 20px;
+        }  
+
+        .timeline {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 6px;
+            background-color: #1e3a8a;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -3px;
+        }
+
+        .container {
+            padding: 10px 40px;
+            position: relative;
+            background-color: inherit;
+            width: 50%;
+        }
+
+        .container.left {
+            left: 0;
+        }
+
+        .container.right {
+            left: 50%;
+        }
+
+        .content {
+            padding: 20px;
+            background-color: white;
+            position: relative;
+            border-radius: 6px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            width: 200px;
+            height: 200px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .content:hover {
+            transform: scale(1.05);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .year {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #1e3a8a;
+        }
+
+        .icon {
+            font-size: 2rem;
+            color: #1e3a8a;
+            margin-bottom: 10px;
+        }     
+        .faq-card {
+            transition: transform 0.3s ease, max-height 0.5s ease, background-color 0.3s ease;
+        }
+        .faq-card:hover {
+            transform: scale(1.02);
+        }
+        .faq-card p {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+        }
+        .faq-card.expanded {
+            background-color: #f0f8ff; /* Slightly highlighted color */
+        }
+        .faq-card.expanded p {
+            max-height: 1000px; /* Arbitrary large value to ensure full expansion */
+        }
+        .questions-container {
+    margin-left: 250px; /* Adjust this value to match the width of your expanded navbar */
+    transition: margin-left 0.3s ease; /* Smooth transition when navbar expands */
+}
+    </style>
+</head>
+<body class="bg-gray-100 font-roboto">
+    <!-- Hero Section -->
+    <div class="bg-gradient-to-r from-green-600 to-indigo-900 text-white text-center py-2 my-10 shadow-lg">
+        <div class="container flex items-end space-x-2">
+            <i class="fa-solid fa-question-circle fa-fade fa-3x p-1 mx-2" style="color: #ffffff;"></i>
+            <h1 class="text-5xl font-bold uppercase tracking-wider">Frequently Asked Questions</h1>            
+        </div>        
+    </div>
+    
+        <div id="navbar-container"></div> <!-- This is where the navbar will be loaded --></div>            
+        <div class="space-y-4 mx-10">
+    <div class="faq-card bg-white p-6 rounded-lg shadow-lg cursor-pointer" onclick="toggleAnswer(this)">
+        <div class="flex items-center mb-4">
+            <i class="fas fa-question-circle text-red-600 text-2xl mr-2"></i>
+            <h2 class="text-xl font-semibold">What is Physique 57?</h2>
+        </div>
+        <p class="hidden">
+            <i class="fas fa-info-circle text-green-500 text-xl mr-2"></i>
+            Physique 57 is India’s first barre-based workout, designed to target full-body muscle endurance in every class. For fitness newbies and professional athletes alike, our classes are designed to sculpt muscle, burn fat and transform your entire body.<br><br>
+            Offered in a group class or private training format, our low impact, high-intensity workout incorporates our scientifically proven method, ‘Interval Overload’ by blending cardio, strength training, stretching and recovery to improve your endurance and boost your metabolism.
+        </p>
+    </div>
+    <div class="faq-card bg-white p-6 rounded-lg shadow-lg cursor-pointer" onclick="toggleAnswer(this)">
+        <div class="flex items-center mb-4">
+            <i class="fas fa-question-circle text-red-600 text-2xl mr-2"></i>
+            <h2 class="text-xl font-semibold">What are the benefits of Physique 57?</h2>
+        </div>
+        <p class="hidden">
+            <i class="fas fa-info-circle text-green-500 text-xl mr-2"></i>
+            We offer a highly effective full-body workout program that provides numerous benefits. We have designed it to tone and sculpt your entire body through a unique combination of pilates, yoga, and cardio & strength training.<br><br>
+            Some of the main benefits of Physique 57 include:<br><br>
+            <strong>Total body toning and sculpting:</strong> Our workout targets all major muscle groups to help enhance muscle definition and shape your physique from head to toe. It can help create a lean, toned, and athletic-looking body.<br><br>
+            <strong>Improved posture and alignment:</strong> We emphasize correct form, posture, and body alignment using pilates and ballet techniques. This can improve overall posture over time.<br><br>
+            <strong>Increased flexibility and range of motion:</strong> The stretching and movement components of Physique 57 make it excellent for enhancing flexibility and mobility.<br><br>
+            <strong>Core strength:</strong> Our program strongly focuses on exercises that engage and strengthen the deep core muscles of the body. This can result in improved stability and strength in the midsection.<br><br>
+            <strong>Low impact:</strong> Many of our moves involve isometric holds rather than high-impact movements, making it gentle on the joints while still delivering results. It's suitable for most fitness levels.<br><br>
+            <strong>Full-body mind-muscle connection:</strong> Physique 57 trains you to focus on engaging the correct muscles during exercises, helping to target specific areas and maximize the benefits.
+        </p>
+    </div>
+    <div class="faq-card bg-white p-6 rounded-lg shadow-lg cursor-pointer" onclick="toggleAnswer(this)">
+        <div class="flex items-center mb-4">
+            <i class="fas fa-question-circle text-red-600 text-2xl mr-2"></i>
+            <h2 class="text-xl font-semibold">Who can do Physique 57?</h2>
+        </div>
+        <p class="hidden">
+            <i class="fas fa-info-circle text-green-500 text-xl mr-2"></i>
+            We welcome individuals of all fitness levels, whether you're just starting or more advanced. Physique 57 is a safe and effective choice for prenatal and postnatal women, and there's no specific age limit. Your well-being and fitness journey are important to us.
+        </p>
+    </div>
+    <div class="faq-card bg-white p-6 rounded-lg shadow-lg cursor-pointer" onclick="toggleAnswer(this)">
+        <div class="flex items-center mb-4">
+            <i class="fas fa-question-circle text-red-600 text-2xl mr-2"></i>
+            <h2 class="text-xl font-semibold">How often should I do Physique 57?</h2>
+        </div>
+        <p class="hidden">
+            <i class="fas fa-info-circle text-green-500 text-xl mr-2"></i>
+            For optimal results, we recommend taking Physique 57 classes at least 3-4 times a week. Keep in mind that the frequency can be adjusted to align with your individual fitness goals and preferences.
+        </p>
+    </div>
+    <div class="faq-card bg-white p-6 rounded-lg shadow-lg cursor-pointer" onclick="toggleAnswer(this)">
+        <div class="flex items-center mb-4">
+            <i class="fas fa-question-circle text-red-600 text-2xl mr-2"></i>
+            <h2 class="text-xl font-semibold">What types of classes are offered by Physique 57?</h2>
+        </div>
+        <p class="hidden">
+            <i class="fas fa-info-circle text-green-500 text-xl mr-2"></i>
+            We're pleased to offer a diverse range of class formats, such as Back Body Blaze, Barre 57, Cardio Barre, FIT, Foundations, SWEAT in 30, Trainer's Choice, Mat 57, Cardio Barre Plus, and Amped Up. These classes are designed to cater to different fitness levels and goals. You can choose from workouts that focus on toning and strengthening specific muscle groups or opt for full-body sessions that incorporate cardio and strength training. Whether you're seeking high-intensity options like Amped Up or shorter, time-efficient workouts like SWEAT in 30, our classes provide various benefits, including improved posture, flexibility, endurance, and overall body strength. No two workouts are ever the same. You’ll never plateau.
+        </p>
+    </div>
+    <div class="faq-card bg-white p-6 rounded-lg shadow-lg cursor-pointer" onclick="toggleAnswer(this)">
+        <div class="flex items-center mb-4">
+            <i class="fas fa-question-circle text-red-600 text-2xl mr-2"></i>
+            <h2 class="text-xl font-semibold">How soon can I see results with Physique 57?</h2>
+        </div>
+        <p class="hidden">
+            <i class="fas fa-info-circle text-green-500 text-xl mr-2"></i>
+            Many of our clients start noticing positive changes in their bodies, posture, sleep, and overall mood after completing just eight classes. Consistency and regular practice are key to achieving and maintaining your desired results with Physique 57.
+        </p>
+    </div>
+    <div class="faq-card bg-white p-6 rounded-lg shadow-lg cursor-pointer" onclick="toggleAnswer(this)">
+        <div class="flex items-center mb-4">
+            <i class="fas fa-question-circle text-red-600 text-2xl mr-2"></i>
+            <h2 class="text-xl font-semibold">Can I attend Physique 57 classes if I'm not flexible?</h2>
+        </div>
+        <p class="hidden">
+            <i class="fas fa-info-circle text-green-500 text-xl mr-2"></i>
+            We welcome individuals of all flexibility levels. Our method is designed to help improve flexibility over time, and our exercises are crafted to work with various ranges of motion. You don't need to be naturally flexible to begin or succeed in Physique 57.
+        </p>
+    </div>
+    <div class="faq-card bg-white p-6 rounded-lg shadow-lg cursor-pointer" onclick="toggleAnswer(this)">
+        <div class="flex items-center mb-4">
+            <i class="fas fa-question-circle text-red-600 text-2xl mr-2"></i>
+            <h2 class="text-xl font-semibold">Can I join Physique 57 if I have never done barre before?</h2>
+        </div>
+        <p class="hidden">
+            <i class="fas fa-info-circle text-green-500 text-xl mr-2"></i>
+            Absolutely! Physique is a great fit for individuals who are new to barre workouts or fitness in general. Our instructors provide clear guidance and offer modifications for beginners, ensuring that they feel comfortable and confident in the classes.
+        </p>
+    </div>
+    <div class="faq-card bg-white p-6 rounded-lg shadow-lg cursor-pointer" onclick="toggleAnswer(this)">
+        <div class="flex items-center mb-4">
+            <i class="fas fa-question-circle text-red-600 text-2xl mr-2"></i>
+            <h2 class="text-xl font-semibold">Do I need any prior dance experience to do Physique 57?</h2>
+        </div>
+        <p class="hidden">
+            <i class="fas fa-info-circle text-green-500 text-xl mr-2"></i>
+            No, you don't need any prior dance experience to enjoy the benefits of Physique 57. Our method is designed for people of all backgrounds and fitness levels. We focus on the workout techniques and movements, rather than dance choreography.
+        </p>
+    </div>
+    <div class="faq-card bg-white p-6 rounded-lg shadow-lg cursor-pointer" onclick="toggleAnswer(this)">
+        <div class="flex items-center mb-4">
+            <i class="fas fa-question-circle text-red-600 text-2xl mr-2"></i>
+            <h2 class="text-xl font-semibold">How long is each Physique 57 class?</h2>
+        </div>
+        <p class="hidden">
+            <i class="fas fa-info-circle text-green-500 text-xl mr-2"></i>
+            The duration of a typical Physique class varies, but most classes are approximately 57 minutes long. However, we also offer options for shorter durations, such as the Sweat in 30 or the 45-minute express classes. You can choose the duration that best suits your schedule and preferences.
+        </p>
+    </div>
+    <div class="faq-card bg-white p-6 rounded-lg shadow-lg cursor-pointer" onclick="toggleAnswer(this)">
+        <div class="flex items-center mb-4">
+            <i class="fas fa-question-circle text-red-600 text-2xl mr-2"></i>
+            <h2 class="text-xl font-semibold">Do I need to bring any equipment for Physique 57 classes?</h2>
+        </div>
+        <p class="hidden">
+            <i class="fas fa-info-circle text-green-500 text-xl mr-2"></i>
+            No, there's no need to bring your own equipment to our classes. Physique provides all the necessary equipment, which may include hand weights, playground balls, resistance bands, and the ballet barre for support. Our studios are full service with luxury fittings & amenities in our Locker Rooms & Waiting areas as well.
+        </p>
+    </div>
+    <div class="faq-card bg-white p-6 rounded-lg shadow-lg cursor-pointer" onclick="toggleAnswer(this)">
+        <div class="flex items-center mb-4">
+            <i class="fas fa-question-circle text-red-600 text-2xl mr-2"></i>
+            <h2 class="text-xl font-semibold">Are there modifications available for different fitness levels?</h2>
+        </div>
+        <p class="hidden">
+            <i class="fas fa-info-circle text-green-500 text-xl mr-2"></i>
+            In our approach, we prioritize providing a safe and effective workout experience for all our clients. While our workouts may not be entirely customizable, we do encourage beginners to dedicate more time to our foundation levels. This helps them approach their classes at Physique 57 in a safer, more effective manner. For those who are more advanced or fitter, we offer opportunities to explore higher levels of intensity and challenge. Our aim is to ensure that regardless of fitness level, you can continue to progress & grow, while safely achieving your fitness goals.
+        </p>
+    </div>
+    <div class="faq-card bg-white p-6 rounded-lg shadow-lg cursor-pointer" onclick="toggleAnswer(this)">
+        <div class="flex items-center mb-4">
+            <i class="fas fa-question-circle text-red-600 text-2xl mr-2"></i>
+            <h2 class="text-xl font-semibold">Can I do Physique 57 if I have an injury or physical limitations?</h2>
+        </div>
+        <p class="hidden">
+            <i class="fas fa-info-circle text-green-500 text-xl mr-2"></i>
+            Although our workouts are suitable for individuals with a diverse range of medical conditions, it's important to note that the suitability can vary based on the specific details of the individual's condition. If you have a specific medical condition, we will require you to obtain clearance to workout from your doctor before you attend a Physique 57 class.
+        </p>
+    </div>
+    <div class="faq-card bg-white p-6 rounded-lg shadow-lg cursor-pointer" onclick="toggleAnswer(this)">
+        <div class="flex items-center mb-4">
+            <i class="fas fa-question-circle text-red-600 text-2xl mr-2"></i>
+            <h2 class="text-xl font-semibold">Can I take Physique 57 classes if I'm pregnant?</h2>
+        </div>
+        <p class="hidden">
+            <i class="fas fa-info-circle text-green-500 text-xl mr-2"></i>
+            Physique is considered a safe and effective option for prenatal women. The low-impact nature and focus on form and control make it an excellent choice for maintaining fitness and preparing for labor and delivery. However, it is important to consult with your healthcare provider before starting or continuing any exercise routine during pregnancy.
+        </p>
+    </div>
+    <div class="faq-card bg-white p-6 rounded-lg shadow-lg cursor-pointer" onclick="toggleAnswer(this)">
+        <div class="flex items-center mb-4">
+            <i class="fas fa-question-circle text-red-600 text-2xl mr-2"></i>
+            <h2 class="text-xl font-semibold">Can I do Physique 57 if I've recently given birth?</h2>
+        </div>
+        <p class="hidden">
+            <i class="fas fa-info-circle text-green-500 text-xl mr-2"></i>
+            Physique can assist in postnatal recovery and rehabilitation. The low-impact exercises and focus on targeted core toning can help rebuild the core & overall strength and endurance postpartum. However, it is important to consult with your healthcare provider before starting or resuming any exercise program after childbirth.
+        </p>
+    </div>
+    <div class="faq-card bg-white p-6 rounded-lg shadow-lg cursor-pointer" onclick="toggleAnswer(this)">
+        <div class="flex items-center mb-4">
+            <i class="fas fa-question-circle text-red-600 text-2xl mr-2"></i>
+            <h2 class="text-xl font-semibold">Can I do Physique 57 if I have a specific medical condition?</h2>
+        </div>
+        <p class="hidden">
+            <i class="fas fa-info-circle text-green-500 text-xl mr-2"></i>
+            Although our workouts are suitable for individuals with a diverse range of medical conditions, it's important to note that the suitability can vary based on the specific details of the individual's condition. If you have a specific medical condition, we will require you to obtain clearance to workout from your doctor before you attend a Physique 57 class.
+        </p>
+    </div>
+    <div class="faq-card bg-white p-6 rounded-lg shadow-lg cursor-pointer" onclick="toggleAnswer(this)">
+        <div class="flex items-center mb-4">
+            <i class="fas fa-question-circle text-red-600 text-2xl mr-2"></i>
+            <h2 class="text-xl font-semibold">Can I do Physique 57 if I have mobility issues?</h2>
+        </div>
+        <p class="hidden">
+            <i class="fas fa-info-circle text-green-500 text-xl mr-2"></i>
+            Physique 57 can be adapted for individuals with certain mobility issues. Our instructors can provide modifications and alternatives to exercises to accommodate different levels of mobility. It is recommended to inform the instructor about any specific limitations or concerns you may have, so they can provide appropriate guidance during the class.
+        </p>
+    </div>
+    <div class="faq-card bg-white p-6 rounded-lg shadow-lg cursor-pointer" onclick="toggleAnswer(this)">
+        <div class="flex items-center mb-4">
+            <i class="fas fa-question-circle text-red-600 text-2xl mr-2"></i>
+            <h2 class="text-xl font-semibold">Can I take Physique 57 classes if I have preexisting injuries?</h2>
+        </div>
+        <p class="hidden">
+            <i class="fas fa-info-circle text-green-500 text-xl mr-2"></i>
+            Physique 57 classes can be modified to accommodate individuals with preexisting injuries. It is important to inform the instructor about your injuries before the class, so they can provide appropriate modifications and alternatives to exercises to ensure your safety and comfort. It is recommended to consult with your healthcare provider or physical therapist for guidance specific to your condition.
+        </p>
+    </div>
+    <div class="faq-card bg-white p-6 rounded-lg shadow-lg cursor-pointer" onclick="toggleAnswer(this)">
+        <div class="flex items-center mb-4">
+            <i class="fas fa-question-circle text-red-600 text-2xl mr-2"></i>
+            <h2 class="text-xl font-semibold">Are there options for private training at Physique 57?</h2>
+        </div>
+        <p class="hidden">
+            <i class="fas fa-info-circle text-green-500 text-xl mr-2"></i>
+            Yes, Physique 57 offers a comprehensive menu of private training sessions. You can contact the studio directly or inquire with our concierge team for more information about private training options, including personalized sessions tailored to your specific goals and needs.
+        </p>
+    </div>
+    <div class="faq-card bg-white p-6 rounded-lg shadow-lg cursor-pointer" onclick="toggleAnswer(this)">
+        <div class="flex items-center mb-4">
+            <i class="fas fa-question-circle text-red-600 text-2xl mr-2"></i>
+            <h2 class="text-xl font-semibold">Can I do Physique 57 if I have a busy schedule?</h2>
+        </div>
+        <p class="hidden">
+            <i class="fas fa-info-circle text-green-500 text-xl mr-2"></i>
+            Yes, we offer a variety of class formats and duration options to accommodate different schedules. You can choose from full-length, 57-minute classes or Express, 45-minute classes, which provide an effective workout in less time.
+        </p>
+    </div>
+    <div class="faq-card bg-white p-6 rounded-lg shadow-lg cursor-pointer" onclick="toggleAnswer(this)">
+        <div class="flex items-center mb-4">
+            <i class="fas fa-question-circle text-red-600 text-2xl mr-2"></i>
+            <h2 class="text-xl font-semibold">How many Physique 57 locations are there?</h2>
+        </div>
+        <p class="hidden">
+            <i class="fas fa-info-circle text-green-500 text-xl mr-2"></i>
+            🠊 Physique 57 offers in-person classes in Mumbai at Taj Wellington Mews and Kwality House studios.
+        </p>
+    </div>
+    <div class="faq-card bg-white p-6 rounded-lg shadow-lg cursor-pointer" onclick="toggleAnswer(this)">
+        <div class="flex items-center mb-4">
+            <i class="fas fa-question-circle text-red-600 text-2xl mr-2"></i>
+            <h2 class="text-xl font-semibold">How do I sign up for Physique 57 classes?</h2>
+        </div>
+        <p class="hidden">
+            <i class="fas fa-info-circle text-green-500 text-xl mr-2"></i>
+            To book your classes, simply download the Physique India App (by Momence) and log in with your registered email id. You can find our app on both the Apple App Store and Android Play Store.
+        </p>
+    </div>
+    <div class="faq-card bg-white p-6 rounded-lg shadow-lg cursor-pointer" onclick="toggleAnswer(this)">
+        <div class="flex items-center mb-4">
+            <i class="fas fa-question-circle text-red-600 text-2xl mr-2"></i>
+            <h2 class="text-xl font-semibold">What should I wear and bring to a Physique 57 class?</h2>
+        </div>
+        <p class="hidden">
+            <i class="fas fa-info-circle text-green-500 text-xl mr-2"></i>
+            For Physique classes, we recommend wearing comfortable workout attire that allows freedom of movement. Most participants choose to wear grip socks during the class. It's also advisable to bring a water bottle to stay hydrated and a towel if desired.
+        </p>
+    </div>
+    <div class="faq-card bg-white p-6 rounded-lg shadow-lg cursor-pointer" onclick="toggleAnswer(this)">
+        <div class="flex items-center mb-4">
+            <i class="fas fa-question-circle text-red-600 text-2xl mr-2"></i>
+            <h2 class="text-xl font-semibold">Can I attend Physique 57 classes if I'm visiting from out of town?</h2>
+        </div>
+        <p class="hidden">
+            <i class="fas fa-info-circle text-green-500 text-xl mr-2"></i>
+            Yes, we warmly welcome visitors from out of town. You can check the availability of classes at your desired location and reserve your spot in advance to ensure you can participate in the classes during your visit.
+        </p>
+    </div>
+    <div class="faq-card bg-white p-6 rounded-lg shadow-lg cursor-pointer" onclick="toggleAnswer(this)">
+        <div class="flex items-center mb-4">
+            <i class="fas fa-question-circle text-red-600 text-2xl mr-2"></i>
+            <h2 class="text-xl font-semibold">Is there a cancellation policy for Physique 57 classes?</h2>
+        </div>
+        <p class="hidden">
+            <i class="fas fa-info-circle text-green-500 text-xl mr-2"></i>
+            All cancellations for Studio classes must be informed to the front desk team via official channels i.e. email, WhatsApp, via the Physique 57 India app or directly in person at least 12 hours prior to the Scheduled start time of the reserved class. All Private Bookings/Workshop Reservations can be cancelled without incurring any charge, provided the cancellation request reaches the front desk team no later than 24 hours until the scheduled start time of the private session. Failure to adhere to the cancellation policy will result in the deduction of the class from your Class Package.<br><br>
+            If you cancel a reservation more than 12 hours before the scheduled class start time, the class will be credited to your Physique 57 account for future reservations.
+        </p>
+    </div>
+    <div class="faq-card bg-white p-6 rounded-lg shadow-lg cursor-pointer" onclick="toggleAnswer(this)">
+        <div class="flex items-center mb-4">
+            <i class="fas fa-question-circle text-red-600 text-2xl mr-2"></i>
+            <h2 class="text-xl font-semibold">How can I sign up for a trial class?</h2>
+        </div>
+        <p class="hidden">
+            <i class="fas fa-info-circle text-green-500 text-xl mr-2"></i>
+            To book yourself for a complimentary trial session, you can follow the link below and register for the class. Please do arrive 10-minutes before the scheduled class start time to speak with your trainer.
+        </p>
+    </div>
+    <div class="faq-card bg-white p-6 rounded-lg shadow-lg cursor-pointer" onclick="toggleAnswer(this)">
+        <div class="flex items-center mb-4">
+            <i class="fas fa-question-circle text-red-600 text-2xl mr-2"></i>
+            <h2 class="text-xl font-semibold">Can I have a look at your class schedule?</h2>
+        </div>
+        <p class="hidden">
+            <i class="fas fa-info-circle text-green-500 text-xl mr-2"></i>
+            Of course, you can find our class schedule here, where you can also purchase a membership and book yourself into a class of your choosing. Your fitness journey is important to us.
+        </p>
+    </div>
+</div>
+</div>
+<script>
+    function toggleAnswer(element) {
+            const allCards = document.querySelectorAll('.faq-card');
+            allCards.forEach(card => {
+                if (card !== element) {
+                    card.classList.remove('expanded');
+                    card.querySelector('p').classList.add('hidden');
+                }
+            });
+            element.classList.toggle('expanded');
+            element.querySelector('p').classList.toggle('hidden');
+        }
+        document.addEventListener("DOMContentLoaded", function() {
+            fetch('navbar.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('navbar-container').innerHTML = data;
+                })
+                .catch(error => console.error('Error loading the navbar:', error));
+        });
+                </script>
+            </div>
+        </div>
+</body>
+</html>
